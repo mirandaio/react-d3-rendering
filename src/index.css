@@ -30,3 +30,39 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+#root {
+  margin: 0 auto;
+}
+
+main {
+  display: flex;
+  min-width: 1420px;
+  justify-content: space-between;
+}
+
+.showcase {
+  min-width: 950px;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2, p {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+svg {
+  border: 1px solid black;
+}
+
+canvas {
+  border: 1px solid black;
+}
