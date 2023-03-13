@@ -4,7 +4,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/root";
 import ReactRendering from "./routes/react-rendering";
 import D3Rendering from "./routes/d3-rendering";
-import data from "./generate-data";
 // import App from './App'
 import "./index.css";
 
@@ -15,11 +14,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/react-rendering",
-    element: <ReactRendering data={data} />,
+    element: <ReactRendering />,
   },
   {
     path: "/d3-rendering",
-    element: <D3Rendering data={data} />,
+    element: <D3Rendering />,
   },
 ]);
 
