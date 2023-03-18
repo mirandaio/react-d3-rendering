@@ -35,12 +35,5 @@ export default function D3Rendering() {
       .attr("transform", (d) => `translate(${xScale(d.x)}, ${yScale(d.y)})`);
   }, []);
 
-  return (
-    <svg
-      ref={svgRef}
-      width={WIDTH}
-      height={HEIGHT}
-      style={{ outline: "1px solid red" }}
-    />
-  );
+  return <svg ref={svgRef} width={WIDTH} height={HEIGHT} />;
 }

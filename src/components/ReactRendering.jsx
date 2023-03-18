@@ -21,7 +21,7 @@ const yScale = d3
 
 export default function ReactRendering() {
   return (
-    <svg width={WIDTH} height={HEIGHT} style={{ outline: "1px solid red" }}>
+    <svg width={WIDTH} height={HEIGHT}>
       {data.map((d, i) => {
         return (
           <path
