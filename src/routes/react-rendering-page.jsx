@@ -1,4 +1,4 @@
-import ReactRendering from "../components/ReactRendering";
+import ReactRendering from '../components/ReactRendering';
 
 export default function ReactRenderingPage() {
   return (

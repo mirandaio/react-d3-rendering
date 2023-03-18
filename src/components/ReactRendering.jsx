@@ -1,4 +1,4 @@
-import * as d3 from "d3";
+import * as d3 from 'd3';
 import {
   data,
   pathData,
@@ -7,7 +7,7 @@ import {
   PADDING,
   MAX_X,
   MAX_Y,
-} from "../generate-data";
+} from '../generate-data';
 
 const xScale = d3
   .scaleLinear()

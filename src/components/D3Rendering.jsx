@@ -1,5 +1,5 @@
-import * as d3 from "d3";
-import { useRef, useEffect } from "react";
+import * as d3 from 'd3';
+import { useRef, useEffect } from 'react';
 
 import {
   data,
@@ -9,7 +9,7 @@ import {
   PADDING,
   MAX_X,
   MAX_Y,
-} from "../generate-data";
+} from '../generate-data';
 
 const xScale = d3
   .scaleLinear()
@@ -26,13 +26,13 @@ export default function D3Rendering() {
 
   useEffect(() => {
     d3.select(svgRef.current)
-      .selectAll("path")
+      .selectAll('path')
       .data(data)
-      .join("path")
-      .attr("d", (d) => pathData[d.shape])
-      .attr("fill", (d) => d.color)
-      .attr("stroke", "#999")
-      .attr("transform", (d) => `translate(${xScale(d.x)}, ${yScale(d.y)})`);
+      .join('path')
+      .attr('d', (d) => pathData[d.shape])
+      .attr('fill', (d) => d.color)
+      .attr('stroke', '#999')
+      .attr('transform', (d) => `translate(${xScale(d.x)}, ${yScale(d.y)})`);
   }, []);
 
   return <svg ref={svgRef} width={WIDTH} height={HEIGHT} />;

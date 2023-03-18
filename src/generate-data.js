@@ -1,4 +1,4 @@
-import * as d3 from "d3";
+import * as d3 from 'd3';
 
 const SIZE = 1000;
 const NUM_DATA_POINTS = 10;
