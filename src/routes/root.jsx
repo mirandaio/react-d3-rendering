@@ -12,6 +12,9 @@ export default function Root() {
           <li>
             <Link to="/d3-rendering">D3 rendering</Link>
           </li>
+          <li>
+            <Link to="/canvas-rendering">Canvas rendering</Link>
+          </li>
         </ul>
       </main>
     </>
