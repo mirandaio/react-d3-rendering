@@ -38,3 +38,11 @@ body {
 h1 {
   text-align: center;
 }
+
+svg {
+  border: 1px solid black;
+}
+
+canvas {
+  border: 1px solid black;
+}
