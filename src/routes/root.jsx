@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 export default function Root() {
   return (
@@ -16,6 +16,9 @@ export default function Root() {
             <Link to="/canvas-rendering">Canvas rendering</Link>
           </li>
         </ul>
+        <section>
+          <Outlet />
+        </section>
       </main>
     </>
   );

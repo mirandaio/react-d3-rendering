@@ -11,18 +11,20 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-  },
-  {
-    path: '/react-rendering',
-    element: <ReactRenderingPage />,
-  },
-  {
-    path: '/d3-rendering',
-    element: <D3RenderingPage />,
-  },
-  {
-    path: '/canvas-rendering',
-    element: <CanvasRenderingPage />,
+    children: [
+      {
+        path: '/react-rendering',
+        element: <ReactRenderingPage />,
+      },
+      {
+        path: '/d3-rendering',
+        element: <D3RenderingPage />,
+      },
+      {
+        path: '/canvas-rendering',
+        element: <CanvasRenderingPage />,
+      },
+    ],
   },
 ]);
 
