@@ -1,3 +1,4 @@
+import { useOutletContext } from 'react-router-dom';
 import * as d3 from 'd3';
 import { useRef, useEffect } from 'react';
 
@@ -8,7 +9,7 @@ import {
   PADDING,
   MAX_X,
   MAX_Y,
-  data,
+  // data,
 } from '../generate-data';
 
 const xScale = d3
@@ -22,6 +23,7 @@ const yScale = d3
   .range([HEIGHT - PADDING, PADDING]);
 
 export default function CanvasRendering() {
+  const data = useOutletContext();
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -38,16 +40,21 @@ export default function CanvasRendering() {
       W: d3.symbol().type(d3.symbolWye).size(SIZE).context(ctx),
     };
 
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#999';
+
     data.forEach((d) => {
       ctx.save();
       ctx.fillStyle = d.color;
       ctx.translate(xScale(d.x), yScale(d.y));
       ctx.beginPath();
       generators[d.shape]();
+      ctx.closePath();
+      ctx.stroke();
       ctx.fill();
       ctx.restore();
     });
-  }, []);
+  }, [data]);
 
   return <canvas ref={canvasRef} width={WIDTH} height={HEIGHT} />;
 }

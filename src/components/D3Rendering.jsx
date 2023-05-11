@@ -1,3 +1,4 @@
+import { useOutletContext } from 'react-router-dom';
 import * as d3 from 'd3';
 import { useRef, useEffect } from 'react';
 
@@ -8,7 +9,7 @@ import {
   PADDING,
   MAX_X,
   MAX_Y,
-  data,
+  // data,
 } from '../generate-data';
 
 const circlePathData = d3.symbol().type(d3.symbolCircle).size(SIZE)();
@@ -40,6 +41,7 @@ const yScale = d3
   .range([HEIGHT - PADDING, PADDING]);
 
 export default function D3Rendering() {
+  const data = useOutletContext();
   const svgRef = useRef(null);
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function D3Rendering() {
       .attr('fill', (d) => d.color)
       .attr('stroke', '#999')
       .attr('transform', (d) => `translate(${xScale(d.x)}, ${yScale(d.y)})`);
-  }, []);
+  }, [data]);
 
   return <svg ref={svgRef} width={WIDTH} height={HEIGHT} />;
 }

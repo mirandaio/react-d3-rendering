@@ -1,6 +1,14 @@
+import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { generateData } from '../generate-data';
 
 export default function Root() {
+  const [data, setData] = useState(() => generateData(10));
+
+  const handleOnChange = (e) => {
+    setData(generateData(e.target.value));
+  };
+
   return (
     <>
       <h1>React + D3 rendering</h1>
@@ -16,8 +24,9 @@ export default function Root() {
             <Link to="/canvas-rendering">Canvas rendering</Link>
           </li>
         </ul>
+        <input type="range" min="10" max="1000" onChange={handleOnChange} />
         <section>
-          <Outlet />
+          <Outlet context={data} />
         </section>
       </main>
     </>
