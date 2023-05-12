@@ -32,6 +32,14 @@ export default function VoronoiD3() {
       .attr('d', (d, i) => voronoi.renderCell(i))
       .attr('fill', (d) => d.color)
       .attr('stroke', '#aaa');
+
+    d3.select(svgRef.current)
+      .selectAll('circle')
+      .data(data)
+      .join('circle')
+      .attr('r', 2)
+      .attr('cx', (d) => xScale(d.x))
+      .attr('cy', (d) => yScale(d.y));
   }, [data]);
 
   return <svg ref={svgRef} width={WIDTH} height={HEIGHT} />;

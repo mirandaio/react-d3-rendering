@@ -17,7 +17,7 @@ export default function VoronoiCanvas() {
   const data = useOutletContext();
   const canvasRef = useRef(null);
 
-  useEffect(() => {
+  const update = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
@@ -27,7 +27,6 @@ export default function VoronoiCanvas() {
       (d) => yScale(d.y)
     );
     const voronoi = delaunay.voronoi([0, 0, WIDTH, HEIGHT]);
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = '#aaa';
 
@@ -38,6 +37,27 @@ export default function VoronoiCanvas() {
       ctx.stroke();
       ctx.fill();
     });
+
+    ctx.beginPath();
+    ctx.fillStyle = 'black';
+    delaunay.renderPoints(ctx);
+    ctx.fill();
+  };
+
+  /* useEffect(() => {
+    canvasRef.current.addEventListener('mousemove', (event) => {
+      event.preventDefault();
+      data[0] = {
+        ...data[0],
+        x: xScale.invert(event.layerX),
+        y: yScale.invert(event.layerY),
+      };
+      update();
+    });
+  }, []); */
+
+  useEffect(() => {
+    update();
   }, [data]);
 
   return <canvas ref={canvasRef} width={WIDTH} height={HEIGHT} />;

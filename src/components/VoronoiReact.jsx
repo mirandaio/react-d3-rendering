@@ -34,6 +34,9 @@ export default function VoronoiReact() {
           />
         );
       })}
+      {data.map((d, i) => {
+        return <circle key={i} r="2" cx={xScale(d.x)} cy={yScale(d.y)} />;
+      })}
     </svg>
   );
 }
