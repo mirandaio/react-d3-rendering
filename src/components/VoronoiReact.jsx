@@ -25,7 +25,14 @@ export default function VoronoiReact() {
   return (
     <svg width={WIDTH} height={HEIGHT}>
       {data.map((d, i) => {
-        return <path d={voronoi.renderCell(i)} stroke="#aaa" fill={d.color} />;
+        return (
+          <path
+            key={i}
+            d={voronoi.renderCell(i)}
+            stroke="#aaa"
+            fill={d.color}
+          />
+        );
       })}
     </svg>
   );

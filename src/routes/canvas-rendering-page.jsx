@@ -1,10 +1,11 @@
-import CanvasRendering from '../components/CanvasRendering';
+// import CanvasRendering from '../components/CanvasRendering';
+import VoronoiCanvas from '../components/VoronoiCanvas';
 
 export default function CanvasRenderingPage() {
   return (
     <>
       <h2>Canvas rendering</h2>
-      <CanvasRendering />
+      <VoronoiCanvas />
     </>
   );
 }
