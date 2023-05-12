@@ -12,7 +12,7 @@ export default function Root() {
 
   return (
     <>
-      <h1>React + D3 rendering</h1>
+      <h1>Rendering performance</h1>
       <main>
         <section>
           <LagRadar size="300" />
@@ -20,7 +20,7 @@ export default function Root() {
         <section className="showcase">
           <ul>
             <li>
-              <Link to="/react-rendering">React rendering</Link>
+              <Link to="/">React rendering</Link>
             </li>
             <li>
               <Link to="/d3-rendering">D3 rendering</Link>

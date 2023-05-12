@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: '/react-rendering',
+        path: '/',
         element: <ReactRenderingPage />,
       },
       {
