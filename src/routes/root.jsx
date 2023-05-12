@@ -30,9 +30,8 @@ export default function Root() {
             </li>
           </ul>
           <input type="range" min="10" max="10000" onChange={handleOnChange} />
-          <section>
-            <Outlet context={data} />
-          </section>
+          <p>Number of data points rendered: {data.length}</p>
+          <Outlet context={data} />
         </section>
       </main>
     </>
