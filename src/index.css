@@ -36,7 +36,13 @@ body {
 }
 
 main {
-  min-width: 900px;
+  display: flex;
+  min-width: 1300px;
+  justify-content: space-between;
+}
+
+.showcase {
+  min-width: 950px;
 }
 
 h1 {
