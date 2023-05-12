@@ -2,15 +2,7 @@ import { useOutletContext } from 'react-router-dom';
 import * as d3 from 'd3';
 import { useRef, useEffect } from 'react';
 
-import {
-  SIZE,
-  WIDTH,
-  HEIGHT,
-  PADDING,
-  MAX_X,
-  MAX_Y,
-  // data,
-} from '../generate-data';
+import { SIZE, WIDTH, HEIGHT, PADDING, MAX_X, MAX_Y } from '../generate-data';
 
 const xScale = d3
   .scaleLinear()
