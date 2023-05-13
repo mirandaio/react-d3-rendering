@@ -44,17 +44,27 @@ export default function VoronoiCanvas() {
     ctx.fill();
   };
 
-  /* useEffect(() => {
-    canvasRef.current.addEventListener('mousemove', (event) => {
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    const handleMousemove = (event) => {
       event.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+
       data[0] = {
         ...data[0],
-        x: xScale.invert(event.layerX),
-        y: yScale.invert(event.layerY),
+        x: xScale.invert(event.clientX - rect.left),
+        y: yScale.invert(event.clientY - rect.top),
       };
       update();
-    });
-  }, []); */
+    };
+
+    canvas.addEventListener('mousemove', handleMousemove);
+
+    return () => {
+      canvas.removeEventListener('mousemove', handleMousemove);
+    };
+  }, [data]);
 
   useEffect(() => {
     update();
