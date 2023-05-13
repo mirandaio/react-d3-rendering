@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import * as d3 from 'd3';
 import { WIDTH, HEIGHT, PADDING, MAX_X, MAX_Y } from '../generate-data';
@@ -13,7 +14,8 @@ const yScale = d3
   .range([HEIGHT - PADDING, PADDING]);
 
 export default function VoronoiReact() {
-  const data = useOutletContext();
+  const [data, setData] = useOutletContext();
+  const svgRef = useRef(null);
 
   const delaunay = d3.Delaunay.from(
     data,
@@ -22,8 +24,27 @@ export default function VoronoiReact() {
   );
   const voronoi = delaunay.voronoi([0, 0, WIDTH, HEIGHT]);
 
+  const handleOnMouseMove = (event) => {
+    const svg = svgRef.current;
+    const rect = svg.getBoundingClientRect();
+
+    const newData = [...data];
+    newData[0] = {
+      ...newData[0],
+      x: xScale.invert(event.clientX - rect.left),
+      y: yScale.invert(event.clientY - rect.top),
+    };
+
+    setData(newData);
+  };
+
   return (
-    <svg width={WIDTH} height={HEIGHT}>
+    <svg
+      ref={svgRef}
+      width={WIDTH}
+      height={HEIGHT}
+      onMouseMove={handleOnMouseMove}
+    >
       {data.map((d, i) => {
         return (
           <path

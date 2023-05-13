@@ -13,62 +13,58 @@ const yScale = d3
   .domain([0, MAX_Y])
   .range([HEIGHT - PADDING, PADDING]);
 
+const render = (data, ctx) => {
+  const delaunay = d3.Delaunay.from(
+    data,
+    (d) => xScale(d.x),
+    (d) => yScale(d.y)
+  );
+  const voronoi = delaunay.voronoi([0, 0, WIDTH, HEIGHT]);
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  ctx.strokeStyle = '#aaa';
+
+  data.forEach((d, i) => {
+    ctx.beginPath();
+    voronoi.renderCell(i, ctx);
+    ctx.fillStyle = d.color;
+    ctx.stroke();
+    ctx.fill();
+  });
+
+  ctx.beginPath();
+  ctx.fillStyle = 'black';
+  delaunay.renderPoints(ctx);
+  ctx.fill();
+};
+
 export default function VoronoiCanvas() {
-  const data = useOutletContext();
+  const [data, setData] = useOutletContext();
   const canvasRef = useRef(null);
 
-  const update = () => {
+  useEffect(() => {
+    render(data, canvasRef.current.getContext('2d'));
+  }, [data]);
+
+  const handleOnMouseMove = (event) => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const rect = canvas.getBoundingClientRect();
 
-    const delaunay = d3.Delaunay.from(
-      data,
-      (d) => xScale(d.x),
-      (d) => yScale(d.y)
-    );
-    const voronoi = delaunay.voronoi([0, 0, WIDTH, HEIGHT]);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = '#aaa';
+    const newData = [...data];
+    newData[0] = {
+      ...newData[0],
+      x: xScale.invert(event.clientX - rect.left),
+      y: yScale.invert(event.clientY - rect.top),
+    };
 
-    data.forEach((d, i) => {
-      ctx.beginPath();
-      voronoi.renderCell(i, ctx);
-      ctx.fillStyle = d.color;
-      ctx.stroke();
-      ctx.fill();
-    });
-
-    ctx.beginPath();
-    ctx.fillStyle = 'black';
-    delaunay.renderPoints(ctx);
-    ctx.fill();
+    setData(newData);
   };
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-
-    const handleMousemove = (event) => {
-      event.preventDefault();
-      const rect = canvas.getBoundingClientRect();
-
-      data[0] = {
-        ...data[0],
-        x: xScale.invert(event.clientX - rect.left),
-        y: yScale.invert(event.clientY - rect.top),
-      };
-      update();
-    };
-
-    canvas.addEventListener('mousemove', handleMousemove);
-
-    return () => {
-      canvas.removeEventListener('mousemove', handleMousemove);
-    };
-  }, [data]);
-
-  useEffect(() => {
-    update();
-  }, [data]);
-
-  return <canvas ref={canvasRef} width={WIDTH} height={HEIGHT} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      width={WIDTH}
+      height={HEIGHT}
+      onMouseMove={handleOnMouseMove}
+    />
+  );
 }

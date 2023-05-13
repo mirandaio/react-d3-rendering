@@ -31,7 +31,7 @@ export default function Root() {
           </ul>
           <input type="range" min="10" max="20000" onChange={handleOnChange} />
           <p>Number of data points rendered: {data.length}</p>
-          <Outlet context={data} />
+          <Outlet context={[data, setData]} />
         </section>
       </main>
     </>
