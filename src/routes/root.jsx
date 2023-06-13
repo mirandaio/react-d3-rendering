@@ -31,7 +31,7 @@ export default function Root() {
               <Link to="/canvas-rendering">Canvas rendering</Link>
             </li>
           </ul>
-          <input type="range" min="10" max="7000" onChange={handleOnChange} />
+          <input type="range" min="10" max="16000" onChange={handleOnChange} />
           <p>Number of data points rendered: {data.length}</p>
           <Outlet context={[data, setData]} />
         </section>
